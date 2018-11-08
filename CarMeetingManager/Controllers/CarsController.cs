@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarMeetingManager.DAL;
-using CarTuningEventManager.Models;
+using CarMeetingManager.Models;
 
 namespace CarMeetingManager.Controllers
 {
@@ -19,16 +19,6 @@ namespace CarMeetingManager.Controllers
         public CarsController(CarMeetingContext context)
         {
             _context = context;
-
-            if (_context.Cars.Count() == 0)
-            {
-                var cars = new List<Car>
-            {
-                new Car{ Make = "Mazda", Model ="3", Displacement="2000cc", LoweringId=2, ProductionYear=2015, Wheels="19\" ASA TEC GT-7"}
-            };
-                cars.ForEach(c => context.Cars.Add(c));
-                context.SaveChanges();
-            }
         }
 
         // GET: api/Cars

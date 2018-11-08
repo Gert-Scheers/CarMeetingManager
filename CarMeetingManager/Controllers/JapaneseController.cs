@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarMeetingManager.DAL;
-using CarTuningEventManager.Models;
+using CarMeetingManager.Models;
 
 namespace CarMeetingManager.Controllers
 {
@@ -19,23 +19,6 @@ namespace CarMeetingManager.Controllers
         public JapaneseController(CarMeetingContext context)
         {
             _context = context;
-
-            if (_context.Japaneses.Count() == 0)
-            {
-                var japanese = new List<Japanese>
-            {
-                new Japanese { Make = "Mazda"},
-                new Japanese { Make = "Mitsubishi"},
-                new Japanese { Make = "Honda"},
-                new Japanese { Make = "Subaru"},
-                new Japanese { Make = "Toyota"},
-                new Japanese { Make = "Suzuki"},
-                new Japanese { Make = "Nissan"},
-                new Japanese { Make = "Daihatsu"},
-            };
-                japanese.ForEach(j => context.Japaneses.Add(j));
-                context.SaveChanges();
-            }
         }
 
         // GET: api/Japanese

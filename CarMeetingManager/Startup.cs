@@ -27,10 +27,10 @@ namespace CarMeetingManager
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CarMeetingContext>(opt =>
-            opt.UseInMemoryDatabase("Carmeeting"));
             /*services.AddDbContext<CarMeetingContext>(opt =>
-                opt.UseSqlServer(Configuration.GetConnectionString("CarMeetingDatabase")));*/
+            opt.UseInMemoryDatabase("Carmeeting"));*/
+            services.AddDbContext<CarMeetingContext>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("CarMeetingDatabase")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

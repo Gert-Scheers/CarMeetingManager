@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CarMeetingManager.DAL;
-using CarTuningEventManager.Models;
-using Microsoft.AspNetCore.Http;
+﻿using CarMeetingManager.DAL;
+using CarMeetingManager.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CarMeetingManager.Controllers
 {
@@ -19,16 +17,6 @@ namespace CarMeetingManager.Controllers
         public MembersController(CarMeetingContext context)
         {
             _context = context;
-
-            if (_context.Members.Count() == 0)
-            {
-                List<Member> members = new List<Member>
-            {
-                new Member {Name="Gert", Surname="Scheers", DateOfBirth=DateTime.Parse("1994-11-17"), Email="gert_378@hotmail.com", CarId=0, ClubId=0}
-            };
-                members.ForEach(m => context.Members.Add(m));
-                context.SaveChanges();
-            }
         }
 
         [HttpGet]
@@ -64,6 +52,6 @@ namespace CarMeetingManager.Controllers
 
             return CreatedAtRoute("GetMember", new { id = memberid }, member);
         }
-        
+
     }
 }

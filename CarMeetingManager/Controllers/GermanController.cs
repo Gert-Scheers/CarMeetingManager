@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarMeetingManager.DAL;
-using CarTuningEventManager.Models;
+using CarMeetingManager.Models;
 
 namespace CarMeetingManager.Controllers
 {
@@ -19,21 +19,6 @@ namespace CarMeetingManager.Controllers
         public GermanController(CarMeetingContext context)
         {
             _context = context;
-
-            if (_context.Germans.Count() == 0)
-            {
-                var german = new List<German>
-            {
-                new German { Make="BMW" },
-                new German { Make="Audi" },
-                new German { Make="Mercedes" },
-                new German { Make="Porsche" },
-                new German { Make="Volkswagen"},
-                new German { Make="Opel"}
-            };
-                german.ForEach(g => context.Germans.Add(g));
-                context.SaveChanges();
-            }
         }
 
         // GET: api/German

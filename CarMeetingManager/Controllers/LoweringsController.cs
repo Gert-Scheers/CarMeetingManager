@@ -1,5 +1,5 @@
 ﻿using CarMeetingManager.DAL;
-using CarTuningEventManager.Models;
+using CarMeetingManager.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -17,18 +17,6 @@ namespace CarMeetingManager.Controllers
         public LoweringsController(CarMeetingContext context)
         {
             _context = context;
-            if (_context.Lowerings.Count() == 0)
-            {
-                var lowerings = new List<Lowering>()
-            {
-                new Lowering { Type = "None" },
-                new Lowering { Type = "Veren" },
-                new Lowering { Type = "Schroefset" },
-                new Lowering { Type = "Air Ride"}
-            };
-                lowerings.ForEach(l => context.Lowerings.Add(l));
-                context.SaveChanges();
-            }
         }
 
         // GET: api/Lowerings

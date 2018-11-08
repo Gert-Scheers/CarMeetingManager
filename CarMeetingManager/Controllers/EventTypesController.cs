@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarMeetingManager.DAL;
-using CarTuningEventManager.Models;
+using CarMeetingManager.Models;
 
 namespace CarMeetingManager.Controllers
 {
@@ -19,20 +19,6 @@ namespace CarMeetingManager.Controllers
         public EventTypesController(CarMeetingContext context)
         {
             _context = context;
-
-            if (_context.EventTypes.Count() == 0)
-            {
-                var eventTypes = new List<EventType>
-            {
-                new EventType{ Type="Japans"},
-                new EventType { Type="Duits"},
-                new EventType { Type="Oldtimer"},
-                new EventType{Type="Tuning"},
-                new EventType {Type="Open" }
-            };
-                eventTypes.ForEach(e => context.EventTypes.Add(e));
-                context.SaveChanges();
-            }
         }
 
         // GET: api/EventTypes

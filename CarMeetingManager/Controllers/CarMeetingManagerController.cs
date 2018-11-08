@@ -1,5 +1,5 @@
 ﻿using CarMeetingManager.DAL;
-using CarTuningEventManager.Models;
+using CarMeetingManager.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,91 +19,94 @@ namespace CarMeetingManager.Controllers
         public CarMeetingManagerController(CarMeetingContext context)
         {
             _context = context;
-
-            if (_context.Lowerings.Count() == 0)
+            if (!_context.Database.EnsureCreated())
             {
+                _context.Database.Migrate();
+
+                var japanese = new List<Japanese>
+                    {
+                        new Japanese { Make = "Mazda"},
+                        new Japanese { Make = "Mitsubishi"},
+                        new Japanese { Make = "Honda"},
+                        new Japanese { Make = "Subaru"},
+                        new Japanese { Make = "Toyota"},
+                        new Japanese { Make = "Suzuki"},
+                        new Japanese { Make = "Nissan"},
+                        new Japanese { Make = "Daihatsu"}
+                    };
+                japanese.ForEach(j => _context.Japaneses.Add(j));
+                _context.SaveChanges();
+
+                var german = new List<German>
+                    {
+                        new German { Make="BMW" },
+                        new German { Make="Audi" },
+                        new German { Make="Mercedes" },
+                        new German { Make="Porsche" },
+                        new German { Make="Volkswagen"},
+                        new German { Make="Opel"}
+                    };
+                german.ForEach(g => _context.Germans.Add(g));
+                _context.SaveChanges();
+
                 var lowerings = new List<Lowering>()
-            {
-                new Lowering { Type = "None" },
-                new Lowering { Type = "Veren" },
-                new Lowering { Type = "Schroefset" },
-                new Lowering { Type = "Air Ride"}
-            };
-                lowerings.ForEach(l => context.Lowerings.Add(l));
-                context.SaveChanges();
+                    {
+                        new Lowering { Type = "None" },
+                        new Lowering { Type = "Veren" },
+                        new Lowering { Type = "Schroefset" },
+                        new Lowering { Type = "Air Ride"}
+                    };
+                lowerings.ForEach(l => _context.Lowerings.Add(l));
+                _context.SaveChanges();
 
-                var members = new List<Member>
-            {
-                new Member {Name="Gert", Surname="Scheers", DateOfBirth=DateTime.Parse("1994-11-17"), Email="gert_378@hotmail.com", CarId=0, ClubId=0}
-            };
-                members.ForEach(m => context.Members.Add(m));
-                context.SaveChanges();
+                var eventtypes = new List<EventType>()
+                    {
+                        new EventType { Type = "Japans" },
+                        new EventType { Type = "Duits" },
+                        new EventType { Type = "Oldtimer" },
+                        new EventType { Type = "Tuning"},
+                        new EventType { Type = "Open"}
+                    };
+                eventtypes.ForEach(l => _context.EventTypes.Add(l));
+                _context.SaveChanges();
+
+                var events = new List<Event>
+                    {
+                        new Event { Name="Japfest", Capacity=1500, Location="Zandvoort", EventTypeId=1, Description="Meeting op Circuit Zandvoort, enkel voor Japanse auto's en brommers." },
+                        new Event { Name="Germanized", Capacity = 500, Location="Hechtel", Description="Meeting voor Duitse merken.", EventTypeId=2}
+                    };
+                events.ForEach(e => _context.Events.Add(e));
+                _context.SaveChanges();
+
+                var clubs = new List<Club>
+                    {
+                        new Club{ Name="MazdaClubBelgium", Description="Club uit België, alle modellen binnen mazda zijn toegelaten.", Contact="mazdaclubbe@hotmail.com"},
+                        new Club { Name="DuitseOldtimer", Description="Club voor duitse oldtimers.", Contact="DuitseOldtimer@hotmail.com"}
+                    };
+                clubs.ForEach(c => _context.Clubs.Add(c));
+                _context.SaveChanges();
 
                 var cars = new List<Car>
-            {
-                new Car{ Make = "Mazda", Model ="3", Displacement="2000cc", LoweringId=2, ProductionYear=2015, Wheels="19\" ASA TEC GT-7"}
-            };
+                    {
+                        new Car{ Make = "Mazda", Model ="3", Displacement="2000cc", LoweringId=2, ProductionYear=2015, Wheels="19\" ASA TEC GT-7"}
+                    };
                 cars.ForEach(c => context.Cars.Add(c));
                 context.SaveChanges();
 
-                var japanese = new List<Japanese>
-            {
-                new Japanese { Make = "Mazda"},
-                new Japanese { Make = "Mitsubishi"},
-                new Japanese { Make = "Honda"},
-                new Japanese { Make = "Subaru"},
-                new Japanese { Make = "Toyota"},
-                new Japanese { Make = "Suzuki"},
-                new Japanese { Make = "Nissan"},
-                new Japanese { Make = "Daihatsu"},
-            };
-                japanese.ForEach(j => context.Japaneses.Add(j));
-                context.SaveChanges();
-
-                var german = new List<German>
-            {
-                new German { Make="BMW" },
-                new German { Make="Audi" },
-                new German { Make="Mercedes" },
-                new German { Make="Porsche" },
-                new German { Make="Volkswagen"},
-                new German { Make="Opel"}
-            };
-                german.ForEach(g => context.Germans.Add(g));
-                context.SaveChanges();
-
-                var eventTypes = new List<EventType>
-            {
-                new EventType{ Type="Japans"},
-                new EventType { Type="Duits"},
-                new EventType { Type="Oldtimer"},
-                new EventType{Type="Tuning"},
-                new EventType {Type="Open" }
-            };
-                eventTypes.ForEach(e => context.EventTypes.Add(e));
-                context.SaveChanges();
-
-                var clubs = new List<Club>
-            {
-                new Club{ Name="MazdaClubBelgium", Description="Club uit België, alle modellen binnen mazda zijn toegelaten.", Contact="mazdaclubbe@hotmail.com"},
-                new Club { Name="DuitseOldtimer", Description="Club voor duitse oldtimers.", Contact="DuitseOldtimer@hotmail.com"}
-            };
-                clubs.ForEach(c => context.Clubs.Add(c));
-                context.SaveChanges();
+                List<Member> members = new List<Member>
+                    {
+                        new Member {Name="Gert", Surname="Scheers", DateOfBirth=DateTime.Parse("1994-11-17"), Email="gert_378@hotmail.com", CarId=1, ClubId=1, City="Lommel", PostalCode="3920", Username="gert.scheers", Password="test" }
+                    };
+                members.ForEach(m => _context.Members.Add(m));
+                _context.SaveChanges();
             }
         }
 
-        /*[HttpGet]
-        public ActionResult<List<Member>> GetAllMembers()
-        {
-            //Work with includes for complete lists! Cars / types / ...
-            return _context.Members.ToList();
-        }*/
-
+        // GET: api/Cars
         [HttpGet]
-        public ActionResult<List<Lowering>> GetAllLowerings()
+        public IEnumerable<Car> GetCars()
         {
-            return _context.Lowerings.ToList();
+            return _context.Cars;
         }
     }
 }

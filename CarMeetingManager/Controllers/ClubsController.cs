@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarMeetingManager.DAL;
-using CarTuningEventManager.Models;
+using CarMeetingManager.Models;
 
 namespace CarMeetingManager.Controllers
 {
@@ -19,17 +19,6 @@ namespace CarMeetingManager.Controllers
         public ClubsController(CarMeetingContext context)
         {
             _context = context;
-
-            if (_context.Clubs.Count() == 0)
-            {
-                var clubs = new List<Club>
-            {
-                new Club{ Name="MazdaClubBelgium", Description="Club uit België, alle modellen binnen mazda zijn toegelaten.", Contact="mazdaclubbe@hotmail.com"},
-                new Club { Name="DuitseOldtimer", Description="Club voor duitse oldtimers.", Contact="DuitseOldtimer@hotmail.com"}
-            };
-                clubs.ForEach(c => context.Clubs.Add(c));
-                context.SaveChanges();
-            }
         }
 
         // GET: api/Clubs
