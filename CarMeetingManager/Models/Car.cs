@@ -21,6 +21,7 @@ namespace CarMeetingManager.Models
         public int LoweringId { get; set; }
         [Display(Name ="Velgen en banden")]
         public string Wheels { get; set; }
+        public int MemberId { get; set; }
 
         public Lowering Lowering { get; set; }
     }

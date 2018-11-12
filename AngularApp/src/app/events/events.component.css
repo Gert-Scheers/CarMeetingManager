@@ -1,0 +1,17 @@
+.mainpage {
+  padding-top: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px;
+  border-bottom: 2px solid black;
+}
+
+.page {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}

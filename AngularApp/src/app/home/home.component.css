@@ -1,0 +1,15 @@
+.mainpage {
+  padding-top: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+}
+
+.eventadd {
+  border: 5px dashed black;
+}
+
+.page {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
