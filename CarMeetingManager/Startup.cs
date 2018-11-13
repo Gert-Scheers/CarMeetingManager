@@ -12,6 +12,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using CarMeetingManager.DAL;
+using AutoMapper;
+using CarMeetingManager.Models;
+using CarMeetingManager.BLL;
+using CarMeetingManager.BLL.DTO;
 
 namespace CarMeetingManager
 {
@@ -20,6 +24,18 @@ namespace CarMeetingManager
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Club, ClubDTO>();
+                cfg.CreateMap<Club, ClubDTO>();
+                cfg.CreateMap<ClubDTO, Club>();
+                cfg.CreateMap<Event, EventDTO>();
+                cfg.CreateMap<EventDTO, Event>();
+                cfg.CreateMap<Member, MemberDTO>();
+                cfg.CreateMap<MemberDTO, Member>();
+                cfg.CreateMap<Registration, RegistrationDTO>();
+                cfg.CreateMap<RegistrationDTO, Registration>();
+            });
         }
 
         public IConfiguration Configuration { get; }

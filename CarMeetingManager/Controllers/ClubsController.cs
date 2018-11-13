@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarMeetingManager.DAL;
 using CarMeetingManager.Models;
+using CarMeetingManager.BLL;
+using CarMeetingManager.BLL.DTO;
 
 namespace CarMeetingManager.Controllers
 {
@@ -15,24 +17,26 @@ namespace CarMeetingManager.Controllers
     public class ClubsController : ControllerBase
     {
         private readonly CarMeetingContext _context;
+        readonly ClubsBL ClubsManager;
 
         public ClubsController(CarMeetingContext context)
         {
             _context = context;
+            ClubsManager = new ClubsBL(context);
         }
-
+        
         // GET: api/Clubs
         [HttpGet]
-        public IEnumerable<Club> GetClubs()
+        public List<ClubDTO> GetClubs()
         {
-            return _context.Clubs;
+            return ClubsManager.GetClubs().ToList();
         }
 
         // GET: api/Clubs/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetClub([FromRoute] int id)
+        public ClubDTO GetClub([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
+            /*if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -44,49 +48,22 @@ namespace CarMeetingManager.Controllers
                 return NotFound();
             }
 
-            return Ok(club);
+            return Ok(club);*/
+            return ClubsManager.GetClubById(id);
         }
 
         // PUT: api/Clubs/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClub([FromRoute] int id, [FromBody] Club club)
+        public string PutClub([FromRoute] int id, [FromBody] ClubDTO club)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != club.ClubId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(club).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ClubExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return "";
         }
 
         // POST: api/Clubs
         [HttpPost]
-        public async Task<IActionResult> PostClub([FromBody] Club club)
+        public string PostClub([FromBody] ClubDTO club)
         {
-            if (!ModelState.IsValid)
+            /*if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -94,12 +71,13 @@ namespace CarMeetingManager.Controllers
             _context.Clubs.Add(club);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClub", new { id = club.ClubId }, club);
+            return CreatedAtAction("GetClub", new { id = club.ClubId }, club);*/
+            return ClubsManager.AddClub(club);
         }
 
-        // DELETE: api/Clubs/5
+        /*// DELETE: api/Clubs/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClub([FromRoute] int id)
+        public string DeleteClub([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
@@ -116,7 +94,7 @@ namespace CarMeetingManager.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(club);
-        }
+        }*/
 
         private bool ClubExists(int id)
         {
