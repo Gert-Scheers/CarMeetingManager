@@ -1,15 +1,23 @@
 .mainpage {
-  padding-top: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 10px;
+  background-image: url("../../assets/meeting2.jpg");
+  background-size: cover;
+  color: white;
 }
 
 .eventadd {
-  border: 5px dashed black;
+  border: 5px solid black;
+  color: white;
 }
 
 .page {
   margin-top: 30px;
   margin-bottom: 30px;
+}
+
+.content {
+  padding-top: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  background-color: rgba(0,0,0,0.6);
 }

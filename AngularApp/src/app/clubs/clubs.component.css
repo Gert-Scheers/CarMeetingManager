@@ -3,15 +3,26 @@
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 10px;
+  background-image: url("../../assets/meeting2.jpg");
+  background-size: cover;
+  color: white;
 }
 
 h1 {
   text-align: center;
   padding: 20px;
-  border-bottom: 2px solid black;
 }
 
 .page {
   margin-top: 30px;
   margin-bottom: 30px;
+}
+
+.listitem {
+  border: 5px solid #dc3545;
+  border-radius: 30px;
+  padding: 10px;
+  margin-right: 10px;
+  background-color: rgba(0,0,0,0.8);
+  color: white;
 }
