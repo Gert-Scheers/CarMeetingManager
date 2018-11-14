@@ -10,16 +10,11 @@ namespace CarMeetingManager.Models
     {
         [Key]
         public int CarId { get; set; }
-        [Required][Display(Name ="Merk")]
         public string Make { get; set; }
-        [Required][Display(Name ="Model")]
         public string Model { get; set; }
-        [Required][Display(Name ="Bouwjaar")]
         public int ProductionYear { get; set; }
-        [Display(Name ="Cilinderinhoud")]
         public string Displacement { get; set; }
         public int LoweringId { get; set; }
-        [Display(Name ="Velgen en banden")]
         public string Wheels { get; set; }
         public int MemberId { get; set; }
 

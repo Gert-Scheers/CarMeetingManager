@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CarMeetingManager.Models
 {
-    public class Japanese
+    public class CarMake
     {
         [Key]
-        public int JapaneseId { get; set; }
-        [Display(Name ="Merk")]
+        public int MakeID { get; set; }
         public string Make { get; set; }
+        public string CountryCode { get; set; }
     }
 }

@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
 namespace CarMeetingManager.Migrations
 {
@@ -9,13 +9,27 @@ namespace CarMeetingManager.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "CarMakes",
+                columns: table => new
+                {
+                    MakeID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Make = table.Column<string>(nullable: true),
+                    CountryCode = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarMakes", x => x.MakeID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Clubs",
                 columns: table => new
                 {
                     ClubId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     Photo = table.Column<string>(nullable: true),
                     Contact = table.Column<string>(nullable: false)
                 },
@@ -30,37 +44,11 @@ namespace CarMeetingManager.Migrations
                 {
                     EventTypeId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Type = table.Column<string>(nullable: true)
+                    Type = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EventTypes", x => x.EventTypeId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Germans",
-                columns: table => new
-                {
-                    GermanId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Make = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Germans", x => x.GermanId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Japaneses",
-                columns: table => new
-                {
-                    JapaneseId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Make = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Japaneses", x => x.JapaneseId);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,7 +57,7 @@ namespace CarMeetingManager.Migrations
                 {
                     LoweringId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Type = table.Column<string>(nullable: true)
+                    Type = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,12 +93,13 @@ namespace CarMeetingManager.Migrations
                 {
                     CarId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Make = table.Column<string>(nullable: false),
-                    Model = table.Column<string>(nullable: false),
+                    Make = table.Column<string>(nullable: true),
+                    Model = table.Column<string>(nullable: true),
                     ProductionYear = table.Column<int>(nullable: false),
                     Displacement = table.Column<string>(nullable: true),
                     LoweringId = table.Column<int>(nullable: false),
-                    Wheels = table.Column<string>(nullable: true)
+                    Wheels = table.Column<string>(nullable: true),
+                    MemberId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -138,17 +127,18 @@ namespace CarMeetingManager.Migrations
                     Username = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: false),
                     CarId = table.Column<int>(nullable: false),
-                    ClubId = table.Column<int>(nullable: false)
+                    ClubId = table.Column<int>(nullable: false),
+                    CarId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Members", x => x.MemberId);
                     table.ForeignKey(
-                        name: "FK_Members_Cars_CarId",
-                        column: x => x.CarId,
+                        name: "FK_Members_Cars_CarId1",
+                        column: x => x.CarId1,
                         principalTable: "Cars",
                         principalColumn: "CarId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Members_Clubs_ClubId",
                         column: x => x.ClubId,
@@ -194,9 +184,9 @@ namespace CarMeetingManager.Migrations
                 column: "EventTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Members_CarId",
+                name: "IX_Members_CarId1",
                 table: "Members",
-                column: "CarId");
+                column: "CarId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Members_ClubId",
@@ -213,113 +203,112 @@ namespace CarMeetingManager.Migrations
                 table: "Registrations",
                 column: "MemberId");
 
+
             //EventTypes
             migrationBuilder.InsertData(
                                 table: "EventTypes",
                                 columns: new[] { "EventTypeId", "Type" },
-                                values: new object[] { 1, "Japans" });
+                                values: new object[] { 1, 1 });
             migrationBuilder.InsertData(
                                 table: "EventTypes",
                                 columns: new[] { "EventTypeId", "Type" },
-                                values: new object[] { 2, "Duits" });
+                                values: new object[] { 2, 2 });
             migrationBuilder.InsertData(
                                 table: "EventTypes",
                                 columns: new[] { "EventTypeId", "Type" },
-                                values: new object[] { 3, "Oldtimer" });
+                                values: new object[] { 3, 3 });
             migrationBuilder.InsertData(
                                 table: "EventTypes",
                                 columns: new[] { "EventTypeId", "Type" },
-                                values: new object[] { 4, "Tuning" });
+                                values: new object[] { 4, 4 });
             migrationBuilder.InsertData(
                                 table: "EventTypes",
                                 columns: new[] { "EventTypeId", "Type" },
-                                values: new object[] { 5, "Open" });
+                                values: new object[] { 5, 5 });
 
             //Lowerings
             migrationBuilder.InsertData(
                                 table: "Lowerings",
                                 columns: new[] { "LoweringId", "Type" },
-                                values: new object[] { 1, "Geen" });
+                                values: new object[] { 1, 1 });
             migrationBuilder.InsertData(
                                 table: "Lowerings",
                                 columns: new[] { "LoweringId", "Type" },
-                                values: new object[] { 2, "Veren" });
+                                values: new object[] { 2, 2 });
             migrationBuilder.InsertData(
                                 table: "Lowerings",
                                 columns: new[] { "LoweringId", "Type" },
-                                values: new object[] { 3, "Schroefset" });
+                                values: new object[] { 3, 3 });
             migrationBuilder.InsertData(
                                 table: "Lowerings",
                                 columns: new[] { "LoweringId", "Type" },
-                                values: new object[] { 4, "Air Ride" });
+                                values: new object[] { 4, 4 });
 
-            //Germans
+            //CarMakes
             migrationBuilder.InsertData(
-                                table: "Germans",
-                                columns: new[] { "GermanId", "Make" },
-                                values: new object[] { 1, "BMW" });
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 1, "BMW", "GER" });
             migrationBuilder.InsertData(
-                                table: "Germans",
-                                columns: new[] { "GermanId", "Make" },
-                                values: new object[] { 2, "Audi" });
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 2, "Audi", "GER" });
             migrationBuilder.InsertData(
-                                table: "Germans",
-                                columns: new[] { "GermanId", "Make" },
-                                values: new object[] { 3, "Mercedes" });
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 3, "Mercedes", "GER" });
             migrationBuilder.InsertData(
-                                table: "Germans",
-                                columns: new[] { "GermanId", "Make" },
-                                values: new object[] { 4, "Porsche" });
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 4, "Porsche", "GER" });
             migrationBuilder.InsertData(
-                                table: "Germans",
-                                columns: new[] { "GermanId", "Make" },
-                                values: new object[] { 5, "Volkswagen" });
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 5, "Volkswagen", "GER" });
             migrationBuilder.InsertData(
-                                table: "Germans",
-                                columns: new[] { "GermanId", "Make" },
-                                values: new object[] { 6, "Opel" });
-
-            //Japaneses
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 6, "Opel", "GER" });
             migrationBuilder.InsertData(
-                                table: "Japaneses",
-                                columns: new[] { "JapaneseId", "Make" },
-                                values: new object[] { 1, "Mazda" });
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 7, "Mazda", "JAP" });
             migrationBuilder.InsertData(
-                                table: "Japaneses",
-                                columns: new[] { "JapaneseId", "Make" },
-                                values: new object[] { 2, "Mitsubishi" });
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 8, "Mitsubishi", "JAP" });
             migrationBuilder.InsertData(
-                                 table: "Japaneses",
-                                 columns: new[] { "JapaneseId", "Make" },
-                                 values: new object[] { 3, "Honda" });
+                                 table: "CarMakes",
+                                 columns: new[] { "MakeID", "Make", "CountryCode" },
+                                 values: new object[] { 9, "Honda", "JAP" });
             migrationBuilder.InsertData(
-                                 table: "Japaneses",
-                                 columns: new[] { "JapaneseId", "Make" },
-                                 values: new object[] { 4, "Subaru" });
+                                 table: "CarMakes",
+                                 columns: new[] { "MakeID", "Make", "CountryCode" },
+                                 values: new object[] { 10, "Subaru", "JAP" });
             migrationBuilder.InsertData(
-                                 table: "Japaneses",
-                                 columns: new[] { "JapaneseId", "Make" },
-                                 values: new object[] { 5, "Toyota" });
+                                 table: "CarMakes",
+                                 columns: new[] { "MakeID", "Make", "CountryCode" },
+                                 values: new object[] { 11, "Toyota", "JAP" });
             migrationBuilder.InsertData(
-                                 table: "Japaneses",
-                                 columns: new[] { "JapaneseId", "Make" },
-                                 values: new object[] { 6, "Suzuki" });
+                                 table: "CarMakes",
+                                 columns: new[] { "MakeID", "Make", "CountryCode" },
+                                 values: new object[] { 12, "Suzuki", "JAP" });
             migrationBuilder.InsertData(
-                                 table: "Japaneses",
-                                 columns: new[] { "JapaneseId", "Make" },
-                                 values: new object[] { 7, "Nissan" });
+                                 table: "CarMakes",
+                                 columns: new[] { "MakeID", "Make", "CountryCode" },
+                                 values: new object[] { 13, "Nissan", "JAP" });
             migrationBuilder.InsertData(
-                                 table: "Japaneses",
-                                 columns: new[] { "JapaneseId", "Make" },
-                                 values: new object[] { 8, "Daihatsu" });
+                                 table: "CarMakes",
+                                 columns: new[] { "MakeID", "Make", "CountryCode" },
+                                 values: new object[] { 14, "Daihatsu", "JAP" });
 
             //Cars
             migrationBuilder.InsertData(
                                  table: "Cars",
-                                 columns: new[] { "CarId", "Make", "Model", "ProductionYear", "Displacement", "LoweringId", "Wheels" },
+                                 columns: new[] { "CarId", "Make", "Model", "ProductionYear", "Displacement", "LoweringId", "Wheels", "MemberId" },
                                  values: new object[] { 1, "Mazda", "3",
                                          "2015", "2000 cc", 3,
-                                         "asa TEC GT7 19\""});
+                                         "asa TEC GT7 19\"", 1});
 
             //Clubs
             migrationBuilder.InsertData(
@@ -355,10 +344,7 @@ namespace CarMeetingManager.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Germans");
-
-            migrationBuilder.DropTable(
-                name: "Japaneses");
+                name: "CarMakes");
 
             migrationBuilder.DropTable(
                 name: "Registrations");

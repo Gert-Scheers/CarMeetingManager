@@ -46,6 +46,11 @@ namespace CarMeetingManager
             services.AddDbContext<CarMeetingContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("CarMeetingDatabase")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Localhost",
+                    builder => builder.WithOrigins("http://localhost:4200"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +67,7 @@ namespace CarMeetingManager
             }
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseCors("Localhost");
         }
     }
 }

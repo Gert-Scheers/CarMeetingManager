@@ -45,6 +45,11 @@ namespace CarMeetingManager.BLL
                 }
             }
             Club c = Mapper.Map<Club>(club);
+            if (c.Photo is null || c.Photo =="")
+            {
+                c.Photo = "No photo";
+            }
+
             if (Repository.AddClub(c))
             {
                 message.Append("Club has been created!");

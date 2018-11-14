@@ -29,11 +29,11 @@ namespace CarMeetingManager.Migrations
 
                     b.Property<int>("LoweringId");
 
-                    b.Property<string>("Make")
-                        .IsRequired();
+                    b.Property<string>("Make");
 
-                    b.Property<string>("Model")
-                        .IsRequired();
+                    b.Property<int>("MemberId");
+
+                    b.Property<string>("Model");
 
                     b.Property<int>("ProductionYear");
 
@@ -46,6 +46,21 @@ namespace CarMeetingManager.Migrations
                     b.ToTable("Cars");
                 });
 
+            modelBuilder.Entity("CarMeetingManager.Models.CarMake", b =>
+                {
+                    b.Property<int>("MakeID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CountryCode");
+
+                    b.Property<string>("Make");
+
+                    b.HasKey("MakeID");
+
+                    b.ToTable("CarMakes");
+                });
+
             modelBuilder.Entity("CarMeetingManager.Models.Club", b =>
                 {
                     b.Property<int>("ClubId")
@@ -55,11 +70,9 @@ namespace CarMeetingManager.Migrations
                     b.Property<string>("Contact")
                         .IsRequired();
 
-                    b.Property<string>("Description")
-                        .IsRequired();
+                    b.Property<string>("Description");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
                     b.Property<string>("Photo");
 
@@ -100,37 +113,11 @@ namespace CarMeetingManager.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Type");
+                    b.Property<int>("Type");
 
                     b.HasKey("EventTypeId");
 
                     b.ToTable("EventTypes");
-                });
-
-            modelBuilder.Entity("CarMeetingManager.Models.German", b =>
-                {
-                    b.Property<int>("GermanId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Make");
-
-                    b.HasKey("GermanId");
-
-                    b.ToTable("Germans");
-                });
-
-            modelBuilder.Entity("CarMeetingManager.Models.Japanese", b =>
-                {
-                    b.Property<int>("JapaneseId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Make");
-
-                    b.HasKey("JapaneseId");
-
-                    b.ToTable("Japaneses");
                 });
 
             modelBuilder.Entity("CarMeetingManager.Models.Lowering", b =>
@@ -139,7 +126,7 @@ namespace CarMeetingManager.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Type");
+                    b.Property<int>("Type");
 
                     b.HasKey("LoweringId");
 
@@ -153,6 +140,8 @@ namespace CarMeetingManager.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CarId");
+
+                    b.Property<int?>("CarId1");
 
                     b.Property<string>("City")
                         .IsRequired();
@@ -181,7 +170,7 @@ namespace CarMeetingManager.Migrations
 
                     b.HasKey("MemberId");
 
-                    b.HasIndex("CarId");
+                    b.HasIndex("CarId1");
 
                     b.HasIndex("ClubId");
 
@@ -227,8 +216,7 @@ namespace CarMeetingManager.Migrations
                 {
                     b.HasOne("CarMeetingManager.Models.Car", "Car")
                         .WithMany()
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CarId1");
 
                     b.HasOne("CarMeetingManager.Models.Club", "Club")
                         .WithMany()

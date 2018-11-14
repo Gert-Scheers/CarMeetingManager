@@ -9,9 +9,11 @@ using CarMeetingManager.DAL;
 using CarMeetingManager.Models;
 using CarMeetingManager.BLL;
 using CarMeetingManager.BLL.DTO;
+using Microsoft.AspNetCore.Cors;
 
 namespace CarMeetingManager.Controllers
 {
+    [EnableCors("Localhost")]
     [Route("api/[controller]")]
     [ApiController]
     public class ClubsController : ControllerBase

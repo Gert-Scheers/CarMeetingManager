@@ -5,7 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Compile Remove="Migrations\20181108110640_Initial.cs" />
+    <Compile Remove="Migrations\20181108110640_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20181114072251_Initial.cs" />
+    <Compile Remove="Migrations\20181114072251_Initial.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="UI\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
