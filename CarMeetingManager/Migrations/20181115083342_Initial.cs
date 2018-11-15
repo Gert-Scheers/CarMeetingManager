@@ -12,14 +12,14 @@ namespace CarMeetingManager.Migrations
                 name: "CarMakes",
                 columns: table => new
                 {
-                    MakeID = table.Column<int>(nullable: false)
+                    MakeId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Make = table.Column<string>(nullable: true),
                     CountryCode = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CarMakes", x => x.MakeID);
+                    table.PrimaryKey("PK_CarMakes", x => x.MakeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,7 +93,7 @@ namespace CarMeetingManager.Migrations
                 {
                     CarId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Make = table.Column<string>(nullable: true),
+                    MakeId = table.Column<int>(nullable: false),
                     Model = table.Column<string>(nullable: true),
                     ProductionYear = table.Column<int>(nullable: false),
                     Displacement = table.Column<string>(nullable: true),
@@ -109,6 +109,12 @@ namespace CarMeetingManager.Migrations
                         column: x => x.LoweringId,
                         principalTable: "Lowerings",
                         principalColumn: "LoweringId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Cars_CarMakes_MakeId",
+                        column: x => x.MakeId,
+                        principalTable: "CarMakes",
+                        principalColumn: "MakeId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -179,6 +185,11 @@ namespace CarMeetingManager.Migrations
                 column: "LoweringId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cars_MakeId",
+                table: "Cars",
+                column: "MakeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Events_EventTypeId",
                 table: "Events",
                 column: "EventTypeId");
@@ -202,7 +213,6 @@ namespace CarMeetingManager.Migrations
                 name: "IX_Registrations_MemberId",
                 table: "Registrations",
                 column: "MemberId");
-
 
             //EventTypes
             migrationBuilder.InsertData(
@@ -301,12 +311,183 @@ namespace CarMeetingManager.Migrations
                                  table: "CarMakes",
                                  columns: new[] { "MakeID", "Make", "CountryCode" },
                                  values: new object[] { 14, "Daihatsu", "JAP" });
-
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 15, "Abarth", "ITA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 16, "AC", "GBR" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 17, "Acura", "JAP" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 18, "Alfa Romeo", "ITA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 19, "Aston Martin", "GBR" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 20, "Bently", "GBR" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 21, "Bugatti", "FRA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 22, "Buick", "USA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 23, "Cadillac", "USA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 24, "Chevrolet", "USA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 25, "Citroën", "FRA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 26, "Chrysler", "USA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 27, "Datsun", "JAP" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 28, "Dodge", "USA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 29, "Ferrari", "ITA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 30, "Fiat", "ITA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 31, "Ford", "USA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 32, "Genesis", "KOR" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 33, "GMC", "USA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 34, "Holden", "AUS" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 35, "Hyundai", "KOR" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 36, "Infinity", "JAP" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 37, "Jaguar", "GBR" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 38, "Jeep", "ITA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 39, "Koenigsegg", "SWE" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 40, "Kia", "KOR" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 41, "Lamborghini", "ITA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 42, "Land Rover", "GBR" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 43, "Lexus", "JAP" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 44, "Lincoln", "USA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 45, "Lotus", "GBR" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 46, "Maserati", "ITA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 47, "McLaren", "GBR" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 48, "MG", "GBR" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 49, "Mini", "GER" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 50, "Peugot", "FRA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 51, "Plymouth", "USA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 52, "Renault", "FRA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 53, "Rolls-Royce", "GBR" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 54, "Seat", "SPA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 55, "Smart", "GER" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 56, "Tesla", "USA" });
+            migrationBuilder.InsertData(
+                                table: "CarMakes",
+                                columns: new[] { "MakeID", "Make", "CountryCode" },
+                                values: new object[] { 57, "Volvo", "SWE" });
             //Cars
             migrationBuilder.InsertData(
                                  table: "Cars",
-                                 columns: new[] { "CarId", "Make", "Model", "ProductionYear", "Displacement", "LoweringId", "Wheels", "MemberId" },
-                                 values: new object[] { 1, "Mazda", "3",
+                                 columns: new[] { "CarId", "MakeId", "Model", "ProductionYear", "Displacement", "LoweringId", "Wheels", "MemberId" },
+                                 values: new object[] { 1, 7, "3",
                                          "2015", "2000 cc", 3,
                                          "asa TEC GT7 19\"", 1});
 
@@ -329,6 +510,7 @@ namespace CarMeetingManager.Migrations
                                          DateTime.Parse("1994-11-17").Date, "3920", "Lommel",
                                          "gert_378@hotmail.com", "gert.scheers", "test", 1, 1});
 
+            //Events
             migrationBuilder.InsertData(
                 table: "Events",
                 columns: new[] { "EventId", "Name", "Description", "Location", "Capacity", "EventTypeId" },
@@ -338,14 +520,10 @@ namespace CarMeetingManager.Migrations
                 table: "Events",
                 columns: new[] { "EventId", "Name", "Description", "Location", "Capacity", "EventTypeId" },
                 values: new object[] { 2, "Germanized", "Meeting voor Duitse merken.", "Hechtel", 500, 2 });
-
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "CarMakes");
-
             migrationBuilder.DropTable(
                 name: "Registrations");
 
@@ -366,6 +544,9 @@ namespace CarMeetingManager.Migrations
 
             migrationBuilder.DropTable(
                 name: "Lowerings");
+
+            migrationBuilder.DropTable(
+                name: "CarMakes");
         }
     }
 }

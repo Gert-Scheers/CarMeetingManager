@@ -9,7 +9,7 @@ namespace CarMeetingManager.Models
     public class CarMake
     {
         [Key]
-        public int MakeID { get; set; }
+        public int MakeId { get; set; }
         public string Make { get; set; }
         public string CountryCode { get; set; }
     }

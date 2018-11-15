@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarMeetingManager.Migrations
 {
     [DbContext(typeof(CarMeetingContext))]
-    [Migration("20181114084212_Initial")]
+    [Migration("20181115083342_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,7 @@ namespace CarMeetingManager.Migrations
 
                     b.Property<int>("LoweringId");
 
-                    b.Property<string>("Make");
+                    b.Property<int>("MakeId");
 
                     b.Property<int>("MemberId");
 
@@ -45,12 +45,14 @@ namespace CarMeetingManager.Migrations
 
                     b.HasIndex("LoweringId");
 
+                    b.HasIndex("MakeId");
+
                     b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("CarMeetingManager.Models.CarMake", b =>
                 {
-                    b.Property<int>("MakeID")
+                    b.Property<int>("MakeId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -58,7 +60,7 @@ namespace CarMeetingManager.Migrations
 
                     b.Property<string>("Make");
 
-                    b.HasKey("MakeID");
+                    b.HasKey("MakeId");
 
                     b.ToTable("CarMakes");
                 });
@@ -203,6 +205,11 @@ namespace CarMeetingManager.Migrations
                     b.HasOne("CarMeetingManager.Models.Lowering", "Lowering")
                         .WithMany()
                         .HasForeignKey("LoweringId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CarMeetingManager.Models.CarMake", "Make")
+                        .WithMany()
+                        .HasForeignKey("MakeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -16,8 +16,6 @@
 
 .content {
   padding-top: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 10px;
+  padding-bottom: 15%;
   background-color: rgba(0,0,0,0.6);
 }

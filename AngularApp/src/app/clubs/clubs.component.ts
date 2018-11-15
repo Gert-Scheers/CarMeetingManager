@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { forEach } from '@angular/router/src/utils/collection';
+import { Club } from '../Models/club';
 
 @Component({
   selector: 'app-clubs',
@@ -12,9 +12,10 @@ export class ClubsComponent implements OnInit {
     title: 'Clubs',
     image: 'assets/clubs.jpg'
   };
+
   response: any;
   data: any;
-  prop: any;
+  list: Object[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +23,16 @@ export class ClubsComponent implements OnInit {
     this.http.get('https://localhost:44398/api/clubs')
       .subscribe((response) => {
         this.response = response;
-        console.log(JSON.parse(this.response));
-      })
+
+        for (var i = 0; i < this.response.length; i++) {
+          let club = new Club();
+          club.Name = response[i].name;
+          club.Description = response[i].description;
+          club.Photo = response[i].photo;
+          club.Contact = response[i].contact;
+          this.list.push(club);
+        }
+      }
+      )
   }
 }

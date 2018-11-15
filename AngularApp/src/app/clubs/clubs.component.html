@@ -1,43 +1,62 @@
 <div class="container page">
   <div class="container mainpage" style="border: 5px solid black;">
     <h1>{{page.title}}</h1>
-    <div class="row">
-      <div class="col-5 offset-1 listitem">
-        <div class="row">
-          <div class="col-3" style="height: 100px; width:100px;">
-            Club Photo Here
+    <div *ngFor="let club of list; let Index = index;">
+      <div class="row">
+        <div class="col-10 offset-1 listitem">
+          <div class="row">
+            <div class="col-4" style="height: 100px; width:100px;">
+              {{club.Photo}}
+            </div>
+            <div class="col-8">
+              {{club.Description}}
+            </div>
           </div>
-          <div class="col-9">
-            Club Description here
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-3">
-            Club Name Here
-          </div>
-          <div class="col-9" style="text-align:right;">
-            <button class="btn btn-danger">>> Join</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-5 listitem">
-        <div class="row">
-          <div class="col-3" style="height: 100px; width: 100px;">
-            Club Photo Here
-          </div>
-          <div class="col-9">
-            Club Description here
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-3">
-            Club Name Here
-          </div>
-          <div class="col-9" style="text-align:right;">
-            <button class="btn btn-danger">>> Join</button>
+          <div class="row">
+            <div class="col-6">
+              {{club.Name}}
+            </div>
+            <div class="col-6" style="text-align:right;">
+              <button class="btn btn-danger">>> Join</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!--
+  <div class="row">
+    <div class="col-5 offset-1 listitem">
+      <div class="row">
+        <div class="col-3" style="height: 100px; width:100px;">
+        </div>
+        <div class="col-9">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-9" style="text-align:right;">
+          <button class="btn btn-danger">>> Join</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-5 listitem">
+      <div class="row">
+        <div class="col-3" style="height: 100px; width: 100px;">
+        </div>
+        <div class="col-9">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-9" style="text-align:right;">
+          <button class="btn btn-danger">>> Join</button>
+        </div>
+      </div>
+    </div>-->
   </div>
-</div>
+  </div>

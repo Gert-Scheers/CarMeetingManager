@@ -2,7 +2,7 @@
   padding-top: 10px;
   padding-left: 30px;
   padding-right: 30px;
-  padding-bottom: 10px;
+  padding-bottom: 60px;
   background-image: url("../../assets/meeting2.jpg");
   background-size: cover;
   color: white;
@@ -22,7 +22,7 @@ h1 {
   border: 5px solid #dc3545;
   border-radius: 30px;
   padding: 10px;
-  margin-right: 10px;
+  margin-bottom: 10px;
   background-color: rgba(0,0,0,0.8);
   color: white;
 }

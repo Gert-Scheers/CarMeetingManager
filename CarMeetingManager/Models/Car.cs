@@ -10,7 +10,7 @@ namespace CarMeetingManager.Models
     {
         [Key]
         public int CarId { get; set; }
-        public string Make { get; set; }
+        public int MakeId { get; set; }
         public string Model { get; set; }
         public int ProductionYear { get; set; }
         public string Displacement { get; set; }
@@ -18,6 +18,7 @@ namespace CarMeetingManager.Models
         public string Wheels { get; set; }
         public int MemberId { get; set; }
 
+        public CarMake Make { get; set; }
         public Lowering Lowering { get; set; }
     }
 }
