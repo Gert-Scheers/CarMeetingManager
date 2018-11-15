@@ -7,25 +7,31 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarMeetingManager.DAL;
 using CarMeetingManager.Models;
+using CarMeetingManager.BLL;
+using CarMeetingManager.BLL.DTO;
+using Microsoft.AspNetCore.Cors;
 
 namespace CarMeetingManager.Controllers
 {
+    [EnableCors("Localhost")]
     [Route("api/[controller]")]
     [ApiController]
     public class EventsController : ControllerBase
     {
         private readonly CarMeetingContext _context;
+        readonly EventsBL EventsManager;
 
         public EventsController(CarMeetingContext context)
         {
             _context = context;
+            EventsManager = new EventsBL(context);
         }
 
         // GET: api/Events
         [HttpGet]
-        public IEnumerable<Event> GetEvents()
+        public List<EventDTO> GetEvents()
         {
-            return _context.Events;
+            return EventsManager.GetAllEvents().ToList();
         }
 
         // GET: api/Events/5

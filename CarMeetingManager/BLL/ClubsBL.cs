@@ -23,7 +23,7 @@ namespace CarMeetingManager.BLL
 
         public IEnumerable<ClubDTO> GetClubs()
         {
-            List<Club> list = Repository.GetAllClubs().AsEnumerable().ToList();
+            List<Club> list = Repository.GetAllClubs().ToList();
             foreach (var item in list)
             {
                 ClubDTO club = Mapper.Map<ClubDTO>(item);

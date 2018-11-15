@@ -1,46 +1,27 @@
 <div class="container page">
   <div class="container mainpage" style="background-color:white; border: 5px solid black;">
     <h1>{{page.title}}</h1>
-    <div class="row">
-      <div class="col-5 listitem offset-1">
-        <div class="row">
-          <div class="col-4">
-            Event Name here
+    <div *ngFor="let event of list">
+      <div class="row">
+        <div class="col-10 offset-1 listitem">
+          <div class="row">
+            <div class="col-4">
+              <h3>{{event.Name}}</h3>
+            </div>
+            <div class="col-8" style="text-align: right;">
+              {{event.Location}}
+            </div>
           </div>
-          <div class="col-8" style="text-align: right;">
-            Event Location Here
+          <div class="row">
+            {{event.Description}}
           </div>
-        </div>
-        <div class="row">
-          Event Description Here
-        </div>
-        <div class="row">
-          <div class="col-6" style="text-align: left;">
-            Open spots: ...
-          </div>
-          <div class="col-6" style="text-align: right;">
-            <button class="btn btn-danger">>> More Info</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-5 listitem">
-        <div class="row">
-          <div class="col-4">
-            Event Name here
-          </div>
-          <div class="col-8" style="text-align: right;">
-            Event Location Here
-          </div>
-        </div>
-        <div class="row">
-          Event Description Here
-        </div>
-        <div class="row">
-          <div class="col-6" style="text-align: left;">
-            Open Spots: ...
-          </div>
-          <div class="col-6" style="text-align: right;">
-            <button class="btn btn-danger">>> More Info</button>
+          <div class="row">
+            <div class="col-6" style="text-align: left;">
+              Open spots: {{event.Capacity}}
+            </div>
+            <div class="col-6" style="text-align: right;">
+              <button class="btn btn-danger">>> More Info</button>
+            </div>
           </div>
         </div>
       </div>

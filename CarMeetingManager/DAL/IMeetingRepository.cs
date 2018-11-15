@@ -20,7 +20,6 @@ namespace CarMeetingManager.DAL
         //Events
         IEnumerable<Event> GetAllEvents();
         Event GetEventById(int id);
-        IEnumerable<Event> GetEventsByTypeId(int id);
 
         //Clubs
         IEnumerable<Club> GetAllClubs();

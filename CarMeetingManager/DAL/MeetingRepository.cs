@@ -92,11 +92,6 @@ namespace CarMeetingManager.DAL
         {
             return _context.Events.Where(e => e.EventId == id).SingleOrDefault();
         }
-
-        public IEnumerable<Event> GetEventsByTypeId(int id)
-        {
-            return _context.Events.Where(e => e.EventTypeId == id).AsEnumerable();
-        }
         #endregion
     }
 }
