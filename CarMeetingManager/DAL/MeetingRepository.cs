@@ -47,6 +47,12 @@ namespace CarMeetingManager.DAL
         {
             return _context.Cars.Where(c => c.MemberId == id).SingleOrDefault();
         }
+
+        public Member GetMemberByUsername(string username)
+        {
+            return _context.Members.SingleOrDefault(u => u.Username == username);
+        }
+
         #endregion
 
         #region Clubs

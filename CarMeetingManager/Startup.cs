@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using CarMeetingManager.BLL.DTO;
+using CarMeetingManager.DAL;
+using CarMeetingManager.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.EntityFrameworkCore;
-using CarMeetingManager.DAL;
-using AutoMapper;
-using CarMeetingManager.Models;
-using CarMeetingManager.BLL;
-using CarMeetingManager.BLL.DTO;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace CarMeetingManager
 {
@@ -45,6 +40,23 @@ namespace CarMeetingManager
         {
             services.AddDbContext<CarMeetingContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("CarMeetingDatabase")));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+
+            ValidIssuer = "https://localhost:44398",
+            ValidAudience = "https://localhost:44398",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("keycryptstring123"))
+        };
+    });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddCors(options =>
             {
@@ -68,6 +80,7 @@ namespace CarMeetingManager
             app.UseHttpsRedirection();
             app.UseMvc();
             app.UseCors("Localhost");
+            app.UseAuthentication();
         }
     }
 }

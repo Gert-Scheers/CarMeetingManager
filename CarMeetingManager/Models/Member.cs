@@ -24,8 +24,8 @@ namespace CarMeetingManager.Models
         public string Email { get; set; }
         [Required]
         public string Username { get; set; }
-        [Required][DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string PasswordHash { get; set; }
+        public string PasswordSalt { get; set; }
         [Required]
         public int CarId { get; set; }
         public int ClubId { get; set; }

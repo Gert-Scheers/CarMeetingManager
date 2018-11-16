@@ -10,6 +10,7 @@ using CarMeetingManager.Models;
 using CarMeetingManager.BLL;
 using CarMeetingManager.BLL.DTO;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarMeetingManager.Controllers
 {
@@ -28,7 +29,7 @@ namespace CarMeetingManager.Controllers
         }
         
         // GET: api/Clubs
-        [HttpGet]
+        [HttpGet, Authorize]
         public List<ClubDTO> GetClubs()
         {
             return ClubsManager.GetClubs().ToList();

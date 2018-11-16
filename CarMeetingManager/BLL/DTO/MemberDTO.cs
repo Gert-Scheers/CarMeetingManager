@@ -11,6 +11,8 @@ namespace CarMeetingManager.BLL.DTO
         public string Surname { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public string PasswordHash { get; set; }
+        public string PasswordSalt { get; set; }
         public int CarId { get; set; }
         public int ClubId { get; set; }
 

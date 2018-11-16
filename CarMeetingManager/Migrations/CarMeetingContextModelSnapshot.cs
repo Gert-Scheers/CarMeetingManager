@@ -158,8 +158,9 @@ namespace CarMeetingManager.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<string>("Password")
-                        .IsRequired();
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PasswordSalt");
 
                     b.Property<string>("PostalCode")
                         .IsRequired();

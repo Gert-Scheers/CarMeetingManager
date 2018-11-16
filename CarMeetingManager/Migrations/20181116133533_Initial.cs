@@ -1,4 +1,5 @@
 ﻿using System;
+using CarMeetingManager.Helpers;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
@@ -131,7 +132,8 @@ namespace CarMeetingManager.Migrations
                     City = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: false),
                     Username = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    PasswordSalt = table.Column<string>(nullable: true),
                     CarId = table.Column<int>(nullable: false),
                     ClubId = table.Column<int>(nullable: false),
                     CarId1 = table.Column<int>(nullable: true)
@@ -213,6 +215,7 @@ namespace CarMeetingManager.Migrations
                 name: "IX_Registrations_MemberId",
                 table: "Registrations",
                 column: "MemberId");
+
 
             //EventTypes
             migrationBuilder.InsertData(
@@ -503,12 +506,16 @@ namespace CarMeetingManager.Migrations
                 values: new object[] { 2, "DuitseOldtimer", "Club voor duitse oldtimers.", "no photo", "DuitseOldtimer@hotmail.com" });
 
             //Members
+            CustomPasswordHasher ph = new CustomPasswordHasher();
+
+            string salt = ph.GetSalt();
             migrationBuilder.InsertData(
                                  table: "Members",
-                                 columns: new[] { "MemberId", "Name", "Surname", "DateOfBirth", "PostalCode", "City", "Email", "Username", "Password", "CarId", "ClubId" },
+                                 columns: new[] { "MemberId", "Name", "Surname", "DateOfBirth", "PostalCode", "City", "Email", "Username", "PasswordHash", "PasswordSalt", "CarId", "ClubId" },
                                  values: new object[] { 1, "Gert", "Scheers",
                                          DateTime.Parse("1994-11-17").Date, "3920", "Lommel",
-                                         "gert_378@hotmail.com", "gert.scheers", "test", 1, 1});
+                                         "gert_378@hotmail.com", "gert.scheers", ph.HashPassword("test", salt), salt, 1, 1});
+            //REDO ph.GetSalt() for every new user to create different salts
 
             //Events
             migrationBuilder.InsertData(

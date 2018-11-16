@@ -16,6 +16,7 @@ namespace CarMeetingManager.DAL
         bool AddLid(Member member);
         Car GetWagenByMemberID(int id);
         bool RemoveLid(Member member);
+        Member GetMemberByUsername(string username);
 
         //Events
         IEnumerable<Event> GetAllEvents();

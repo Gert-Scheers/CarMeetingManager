@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarMeetingManager.Migrations
 {
     [DbContext(typeof(CarMeetingContext))]
-    [Migration("20181115083342_Initial")]
+    [Migration("20181116133533_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -160,8 +160,9 @@ namespace CarMeetingManager.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<string>("Password")
-                        .IsRequired();
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PasswordSalt");
 
                     b.Property<string>("PostalCode")
                         .IsRequired();
