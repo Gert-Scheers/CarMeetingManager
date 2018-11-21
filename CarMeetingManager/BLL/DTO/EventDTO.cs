@@ -14,6 +14,6 @@ namespace CarMeetingManager.BLL.DTO
         public int Capacity { get; set; }
         public int EventTypeId { get; set; }
 
-        public EventType Type { get; set; }
+        public EventTypes Type { get; set; }
     }
 }

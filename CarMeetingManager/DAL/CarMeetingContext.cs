@@ -12,15 +12,19 @@ namespace CarMeetingManager.DAL
         {
 
         }
+        public CarMeetingContext()
+        {
 
-        public DbSet<Car> Cars { get; set; }
-        public DbSet<Club> Clubs { get; set; }
-        public DbSet<Event> Events { get; set; }
-        public DbSet<EventType> EventTypes { get; set; }
-        public DbSet<CarMake> CarMakes { get; set; }
-        public DbSet<Lowering> Lowerings { get; set; }
-        public DbSet<Member> Members { get; set; }
-        public DbSet<Registration> Registrations { get; set; }
+        }
+
+        public virtual DbSet<Car> Cars { get; set; }
+        public virtual DbSet<Club> Clubs { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
+        //public DbSet<EventTypes> EventTypes { get; set; }
+        public virtual DbSet<CarMake> CarMakes { get; set; }
+        //public DbSet<LoweringType> Lowerings { get; set; }
+        public virtual DbSet<Member> Members { get; set; }
+        public virtual DbSet<Registration> Registrations { get; set; }
         
     }
 }

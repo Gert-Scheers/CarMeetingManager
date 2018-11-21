@@ -18,7 +18,7 @@ namespace CarMeetingManager.Controllers
         {
             _context = context;
         }
-
+        /*
         // GET: api/Lowerings
         [HttpGet]
         public IEnumerable<Lowering> GetLowerings()
@@ -82,7 +82,7 @@ namespace CarMeetingManager.Controllers
 
         // POST: api/Lowerings
         [HttpPost]
-        public async Task<IActionResult> PostLowering([FromBody] Lowering lowering)
+        public async Task<IActionResult> PostLowering([FromBody] LoweringType lowering)
         {
             if (!ModelState.IsValid)
             {
@@ -119,6 +119,6 @@ namespace CarMeetingManager.Controllers
         private bool LoweringExists(int id)
         {
             return _context.Lowerings.Any(e => e.LoweringId == id);
-        }
+        }*/
     }
 }

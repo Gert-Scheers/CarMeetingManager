@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarMeetingManager", "CarMeetingManager\CarMeetingManager.csproj", "{2866BA35-7E48-4221-8262-CD84EE206017}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularApp", "AngularApp\AngularApp.csproj", "{696841E3-F3CD-40A1-8F70-8E5014DFB19A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularApp", "AngularApp\AngularApp.csproj", "{696841E3-F3CD-40A1-8F70-8E5014DFB19A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarMeetingManager.Tests", "CarMeetingManager.Tests\CarMeetingManager.Tests.csproj", "{77ECE7A5-2105-47F7-8F32-75AD097581F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{696841E3-F3CD-40A1-8F70-8E5014DFB19A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{696841E3-F3CD-40A1-8F70-8E5014DFB19A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{696841E3-F3CD-40A1-8F70-8E5014DFB19A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77ECE7A5-2105-47F7-8F32-75AD097581F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77ECE7A5-2105-47F7-8F32-75AD097581F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77ECE7A5-2105-47F7-8F32-75AD097581F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77ECE7A5-2105-47F7-8F32-75AD097581F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

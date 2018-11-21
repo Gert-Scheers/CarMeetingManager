@@ -22,6 +22,7 @@ namespace CarMeetingManager.Controllers
         }
 
         // GET: api/EventTypes
+        /*
         [HttpGet]
         public IEnumerable<EventType> GetEventTypes()
         {
@@ -121,6 +122,6 @@ namespace CarMeetingManager.Controllers
         private bool EventTypeExists(int id)
         {
             return _context.EventTypes.Any(e => e.EventTypeId == id);
-        }
+        }*/
     }
 }

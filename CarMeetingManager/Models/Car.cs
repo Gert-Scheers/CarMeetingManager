@@ -20,6 +20,6 @@ namespace CarMeetingManager.Models
 
         //Navigation properties
         public CarMake Make { get; set; }
-        public Lowering Lowering { get; set; }
+        public LoweringType Lowering { get; set; }
     }
 }
