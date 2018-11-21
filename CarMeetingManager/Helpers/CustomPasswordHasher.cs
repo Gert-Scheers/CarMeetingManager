@@ -9,6 +9,7 @@ namespace CarMeetingManager.Helpers
 {
     public class CustomPasswordHasher
     {
+        //Method to hash the given password with salt
         public string HashPassword(string password, string salt)
         {
             //Using SHA1 (Any other method can be used here)
@@ -17,13 +18,15 @@ namespace CarMeetingManager.Helpers
             byte[] hash = sha1.ComputeHash(inputBytes);
             return Convert.ToBase64String(hash);
         }
-
+        
+        //Method to Verify the given password + salt. Hashing the given password to see if it matches the hashed PW stored in DataBase
         public PasswordVerificationResult VerifyHashedPassword(string hashedPassword, string providedPassword, string salt)
         {
             providedPassword = HashPassword(providedPassword, salt);
             return (providedPassword == hashedPassword ? PasswordVerificationResult.Success : PasswordVerificationResult.Failed);
         }
 
+        //Method to call in order to get randomized salt 'key'
         public string GetSalt()
         {
             string token = "";

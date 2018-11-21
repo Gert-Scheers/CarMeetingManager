@@ -21,9 +21,14 @@ namespace CarMeetingManager.BLL
             Repository = new MeetingRepository(context);
         }
 
+        //Get member by username. Return DTO model
         public MemberDTO GetMemberByUsername(string username)
         {
             Member m = Repository.GetMemberByUsername(username);
+            if (m == null)
+            {
+                return null;
+            }
             return Mapper.Map<MemberDTO>(m);
         }
     }

@@ -30,6 +30,7 @@ namespace CarMeetingManager.Models
         public int CarId { get; set; }
         public int ClubId { get; set; }
 
+        //Navigation properties
         public Car Car { get; set; }
         public Club Club { get; set; }
     }

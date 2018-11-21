@@ -21,6 +21,7 @@ namespace CarMeetingManager.BLL
             Repository = new MeetingRepository(context);
         }
 
+        //Get all events from DAL. Map them to DTO model
         public IEnumerable<EventDTO> GetAllEvents()
         {
             List<Event> list = Repository.GetAllEvents().ToList();
@@ -32,6 +33,7 @@ namespace CarMeetingManager.BLL
             return Events;
         }
 
+        //Get event by EventId. Map to DTO model
         public EventDTO GetEventById(int id)
         {
             Event e = Repository.GetEventById(id);

@@ -18,6 +18,7 @@ namespace CarMeetingManager.Models
         public string Wheels { get; set; }
         public int MemberId { get; set; }
 
+        //Navigation properties
         public CarMake Make { get; set; }
         public Lowering Lowering { get; set; }
     }

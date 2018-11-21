@@ -17,6 +17,7 @@ namespace CarMeetingManager.DAL
 
         #region Registration
         //Registrations
+        //Return the number registrations for a given event ( used to count open spots )
         public int GetNumberOfRegistrationsByEventID(int id)
         {
             return _context.Registrations.Where(r => r.EventId == id).Count();
@@ -37,17 +38,17 @@ namespace CarMeetingManager.DAL
             _context.SaveChanges();
             return true;
         }
-
+        //Return all the members of a club by clubID
         public IEnumerable<Member> GetMembersByClubId(int id)
         {
             return _context.Members.Where(m => m.ClubId == id).AsEnumerable();
         }
-
+        //Get the car from a member by the memberId
         public Car GetWagenByMemberID(int id)
         {
             return _context.Cars.Where(c => c.MemberId == id).SingleOrDefault();
         }
-
+        
         public Member GetMemberByUsername(string username)
         {
             return _context.Members.SingleOrDefault(u => u.Username == username);
@@ -62,7 +63,7 @@ namespace CarMeetingManager.DAL
             _context.SaveChanges();
             return true;
         }
-
+        
         public IEnumerable<Club> GetAllClubs()
         {
             return _context.Clubs.AsEnumerable();

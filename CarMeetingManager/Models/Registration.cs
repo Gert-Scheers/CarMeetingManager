@@ -15,6 +15,7 @@ namespace CarMeetingManager.Models
         [Required]
         public int EventId { get; set; }
 
+        //Navigation propertiess
         public Member Member { get; set; }
         public Event Event { get; set; }
     }

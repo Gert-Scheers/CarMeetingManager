@@ -21,6 +21,7 @@ namespace CarMeetingManager.BLL
             Repository = new MeetingRepository(context);
         }
 
+        //Ask clubs from DAL & map them to DTO format
         public IEnumerable<ClubDTO> GetClubs()
         {
             List<Club> list = Repository.GetAllClubs().ToList();
@@ -32,10 +33,13 @@ namespace CarMeetingManager.BLL
             return Clubs;
         }
 
+        //Ask DAL to Add club
         public string AddClub(ClubDTO club)
         {
+            //Get list of current existing clubs
             Clubs = GetClubs().ToList();
 
+            //Check if there's any club with given name
             foreach (ClubDTO item in Clubs)
             {
                 if (item.Name == club.Name)
@@ -44,6 +48,8 @@ namespace CarMeetingManager.BLL
                     return message.ToString();
                 }
             }
+
+            //If club doesn't exist yet, set default value to photo if not added.
             Club c = Mapper.Map<Club>(club);
             if (c.Photo is null || c.Photo =="")
             {
@@ -56,18 +62,19 @@ namespace CarMeetingManager.BLL
             }
             else
             {
-                //TODO: Message exception
                 message.Append("Something went wrong.");
             }
             return message.ToString();
         }
 
+        //Get club by clubId from DAL, map to DTO model
         public ClubDTO GetClubById(int id)
         {
             Club c = Repository.GetClubById(id);
             return Mapper.Map<ClubDTO>(c);
         }
 
+        //Remove given club
         public string RemoveClub(ClubDTO club)
         {
             Club c = Mapper.Map<Club>(club);
@@ -83,6 +90,7 @@ namespace CarMeetingManager.BLL
             return message.ToString();
         }
 
+        //update given club
         public string UpdateClub(ClubDTO club)
         {
             Club c = Mapper.Map<Club>(club);

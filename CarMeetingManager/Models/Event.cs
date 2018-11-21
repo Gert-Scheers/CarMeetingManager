@@ -20,6 +20,7 @@ namespace CarMeetingManager.Models
         public int Capacity { get; set; }
         public int EventTypeId { get; set; }
 
+        //Navigation properties
         public EventType Type { get; set; }
     }
 }

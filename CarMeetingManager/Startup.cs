@@ -19,6 +19,7 @@ namespace CarMeetingManager
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            //Initialize mapper for the DTO <> Model mapping
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Club, ClubDTO>();
@@ -41,6 +42,7 @@ namespace CarMeetingManager
             services.AddDbContext<CarMeetingContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("CarMeetingDatabase")));
 
+            //Add authentication services
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
