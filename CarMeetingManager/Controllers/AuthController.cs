@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CarMeetingManager.BLL;
 using CarMeetingManager.BLL.DTO;
+using CarMeetingManager.BLL.Interfaces;
 using CarMeetingManager.DAL;
 using CarMeetingManager.Helpers;
 using Microsoft.AspNetCore.Http;
@@ -20,13 +21,11 @@ namespace CarMeetingManager.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly CarMeetingContext _context;
-        readonly MembersBL MembersManager;
+        readonly IMembersBL MembersManager;
 
-        public AuthController(CarMeetingContext context)
+        public AuthController(IMembersBL members)
         {
-            _context = context;
-            MembersManager = new MembersBL(context);
+            MembersManager = members;
         }
 
         //Login procedure
@@ -67,6 +66,12 @@ namespace CarMeetingManager.Controllers
                 }
             }
             return NotFound();
+        }
+
+        [HttpPost, Route("register")]
+        public IActionResult Register([FromBody]MemberDTO member)
+        {
+            return null;
         }
     }
 }

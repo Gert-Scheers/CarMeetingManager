@@ -28,10 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BLL\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CarMeetingManager\CarMeetingManager.csproj" />
   </ItemGroup>
 

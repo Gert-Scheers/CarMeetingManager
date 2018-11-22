@@ -1,4 +1,5 @@
-﻿using CarMeetingManager.DAL;
+﻿using CarMeetingManager.BLL.Interfaces;
+using CarMeetingManager.DAL;
 using CarMeetingManager.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,45 +13,29 @@ namespace CarMeetingManager.Controllers
     [ApiController]
     public class MembersController : ControllerBase
     {
-        private readonly CarMeetingContext _context;
+        readonly IMembersBL _members;
 
-        public MembersController(CarMeetingContext context)
+        public MembersController(IMembersBL mem)
         {
-            _context = context;
+            _members = mem;
         }
 
         [HttpGet]
         public ActionResult<List<Member>> GetAllMembers()
         {
-            //Work with includes for complete lists! Cars / types / ...
-            return _context.Members.ToList();
+            throw new NotImplementedException();
         }
 
         [HttpGet("{id}", Name = "GetMember")]
         public ActionResult<Member> GetById(int id)
         {
-            var item = _context.Members.Find(id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-            return item;
+            throw new NotImplementedException();
         }
 
         [HttpPost]
         public IActionResult Create([FromBody]Member member)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            int memberid = _context.Members.Count() + 1;
-
-            _context.Members.Add(member);
-            _context.SaveChanges();
-
-            return CreatedAtRoute("GetMember", new { id = memberid }, member);
+            throw new NotImplementedException();
         }
 
     }

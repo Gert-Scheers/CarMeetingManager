@@ -1,4 +1,5 @@
 ﻿using CarMeetingManager.BLL.DTO;
+using CarMeetingManager.BLL.Interfaces;
 using CarMeetingManager.DAL;
 using System;
 using System.Collections.Generic;
@@ -7,16 +8,14 @@ using System.Threading.Tasks;
 
 namespace CarMeetingManager.BLL
 {
-    public class RegistrationsBL
+    public class RegistrationsBL : IRegistrationsBL
     {
-        private readonly CarMeetingContext _context;
         List<RegistrationDTO> Events = new List<RegistrationDTO>();
         IMeetingRepository Repository;
 
-        public RegistrationsBL(CarMeetingContext context)
+        public RegistrationsBL(IMeetingRepository repo)
         {
-            _context = context;
-            Repository = new MeetingRepository(context);
+            Repository = repo;
         }
 
         //Get number of registrations from DAL

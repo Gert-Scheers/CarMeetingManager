@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using CarMeetingManager.BLL.DTO;
+using CarMeetingManager.BLL.Interfaces;
+using AutoMapper.QueryableExtensions;
 using CarMeetingManager.DAL;
 using CarMeetingManager.Models;
 using System;
@@ -9,35 +11,29 @@ using System.Threading.Tasks;
 
 namespace CarMeetingManager.BLL
 {
-    public class EventsBL
+    public class EventsBL : IEventsBL
     {
-        private CarMeetingContext _context;
         List<EventDTO> Events = new List<EventDTO>();
         IMeetingRepository Repository;
+        IMapper _mapper;
 
-        public EventsBL(CarMeetingContext context)
+        public EventsBL(IMeetingRepository repo, IMapper mapper)
         {
-            _context = context;
-            Repository = new MeetingRepository(context);
+            Repository = repo;
+            _mapper = mapper;
         }
 
         //Get all events from DAL. Map them to DTO model
-        public IEnumerable<EventDTO> GetAllEvents()
+        public List<EventDTO> GetAllEvents()
         {
-            List<Event> list = Repository.GetAllEvents().ToList();
-            foreach (var item in list)
-            {
-                EventDTO eve = Mapper.Map<EventDTO>(item);
-                Events.Add(eve);
-            }
-            return Events;
+            return Repository.GetAllEvents().ProjectTo<EventDTO>(_mapper.ConfigurationProvider).ToList();
         }
 
         //Get event by EventId. Map to DTO model
         public EventDTO GetEventById(int id)
         {
             Event e = Repository.GetEventById(id);
-            return Mapper.Map<EventDTO>(e);
+            return _mapper.Map<EventDTO>(e);
         }
         
     }

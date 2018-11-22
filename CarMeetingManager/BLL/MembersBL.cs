@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using CarMeetingManager.BLL.DTO;
+using CarMeetingManager.BLL.Interfaces;
 using CarMeetingManager.DAL;
 using CarMeetingManager.Models;
 using System;
@@ -9,16 +11,16 @@ using System.Threading.Tasks;
 
 namespace CarMeetingManager.BLL
 {
-    public class MembersBL
+    public class MembersBL : IMembersBL
     {
-        private CarMeetingContext _context;
-        List<MemberDTO> Events = new List<MemberDTO>();
+        List<MemberDTO> Members = new List<MemberDTO>();
         IMeetingRepository Repository;
+        IMapper _mapper;
 
-        public MembersBL(CarMeetingContext context)
+        public MembersBL(IMeetingRepository repo, IMapper mapper)
         {
-            _context = context;
-            Repository = new MeetingRepository(context);
+            Repository = repo;
+            _mapper = mapper;
         }
 
         //Get member by username. Return DTO model
@@ -29,7 +31,22 @@ namespace CarMeetingManager.BLL
             {
                 return null;
             }
-            return Mapper.Map<MemberDTO>(m);
+            return _mapper.Map<MemberDTO>(m);
+        }
+
+        public bool AddLid(MemberDTO member)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<MemberDTO> GetMembersByClubId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool RemoveLid(MemberDTO member)
+        {
+            throw new NotImplementedException();
         }
     }
 }

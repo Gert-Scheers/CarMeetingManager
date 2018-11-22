@@ -12,18 +12,18 @@ namespace CarMeetingManager.DAL
         int GetNumberOfRegistrationsByEventID(int id);
 
         //Members
-        IEnumerable<Member> GetMembersByClubId(int id);
+        IQueryable<Member> GetMembersByClubId(int id);
         bool AddLid(Member member);
         Car GetWagenByMemberID(int id);
         bool RemoveLid(Member member);
         Member GetMemberByUsername(string username);
 
         //Events
-        IEnumerable<Event> GetAllEvents();
+        IQueryable<Event> GetAllEvents();
         Event GetEventById(int id);
 
         //Clubs
-        IEnumerable<Club> GetAllClubs();
+        IQueryable<Club> GetAllClubs();
         Club GetClubById(int id);
         bool AddClub(Club club);
         bool UpdateClub(Club club);

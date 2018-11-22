@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using CarMeetingManager.BLL;
 using CarMeetingManager.BLL.DTO;
+using CarMeetingManager.BLL.Interfaces;
 using CarMeetingManager.DAL;
 using CarMeetingManager.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -19,19 +21,6 @@ namespace CarMeetingManager
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            //Initialize mapper for the DTO <> Model mapping
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Club, ClubDTO>();
-                cfg.CreateMap<Club, ClubDTO>();
-                cfg.CreateMap<ClubDTO, Club>();
-                cfg.CreateMap<Event, EventDTO>();
-                cfg.CreateMap<EventDTO, Event>();
-                cfg.CreateMap<Member, MemberDTO>();
-                cfg.CreateMap<MemberDTO, Member>();
-                cfg.CreateMap<Registration, RegistrationDTO>();
-                cfg.CreateMap<RegistrationDTO, Registration>();
-            });
         }
 
         public IConfiguration Configuration { get; }
@@ -58,13 +47,26 @@ namespace CarMeetingManager
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("keycryptstring123"))
         };
     });
-
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddCors(options =>
             {
                 options.AddPolicy("Localhost",
                     builder => builder.WithOrigins("http://localhost:4200"));
             });
+
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            
+            services.AddScoped<IMeetingRepository, MeetingRepository>();
+            services.AddSingleton(mapper);
+            services.AddScoped<IClubsBL, ClubsBL>();
+            services.AddScoped<IEventsBL, EventsBL>();
+            services.AddScoped<IMembersBL, MembersBL>();
+            services.AddScoped<IRegistrationsBL, RegistrationsBL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

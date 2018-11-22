@@ -39,9 +39,9 @@ namespace CarMeetingManager.DAL
             return true;
         }
         //Return all the members of a club by clubID
-        public IEnumerable<Member> GetMembersByClubId(int id)
+        public IQueryable<Member> GetMembersByClubId(int id)
         {
-            return _context.Members.Where(m => m.ClubId == id).AsEnumerable();
+            return _context.Members.Where(m => m.ClubId == id).AsQueryable();
         }
         //Get the car from a member by the memberId
         public Car GetWagenByMemberID(int id)
@@ -64,9 +64,9 @@ namespace CarMeetingManager.DAL
             return true;
         }
         
-        public IEnumerable<Club> GetAllClubs()
+        public IQueryable<Club> GetAllClubs()
         {
-            return _context.Clubs.AsEnumerable();
+            return _context.Clubs.AsQueryable();
         }
 
         public Club GetClubById(int id)
@@ -90,9 +90,9 @@ namespace CarMeetingManager.DAL
         #endregion
 
         #region Events
-        public IEnumerable<Event> GetAllEvents()
+        public IQueryable<Event> GetAllEvents()
         {
-            return _context.Events.AsEnumerable();
+            return _context.Events.AsQueryable();
         }
 
         public Event GetEventById(int id)

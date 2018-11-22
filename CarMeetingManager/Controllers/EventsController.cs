@@ -10,6 +10,7 @@ using CarMeetingManager.Models;
 using CarMeetingManager.BLL;
 using CarMeetingManager.BLL.DTO;
 using Microsoft.AspNetCore.Cors;
+using CarMeetingManager.BLL.Interfaces;
 
 namespace CarMeetingManager.Controllers
 {
@@ -18,13 +19,11 @@ namespace CarMeetingManager.Controllers
     [ApiController]
     public class EventsController : ControllerBase
     {
-        private readonly CarMeetingContext _context;
-        readonly EventsBL EventsManager;
+        readonly IEventsBL EventsManager;
 
-        public EventsController(CarMeetingContext context)
+        public EventsController(IEventsBL eventsBL)
         {
-            _context = context;
-            EventsManager = new EventsBL(context);
+            EventsManager = eventsBL;
         }
 
         // GET: api/Events
@@ -34,6 +33,7 @@ namespace CarMeetingManager.Controllers
             return EventsManager.GetAllEvents().ToList();
         }
 
+        /*
         // GET: api/Events/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEvent([FromRoute] int id)
@@ -127,6 +127,6 @@ namespace CarMeetingManager.Controllers
         private bool EventExists(int id)
         {
             return _context.Events.Any(e => e.EventId == id);
-        }
+        }*/
     }
 }
